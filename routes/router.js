@@ -1,22 +1,18 @@
-import { Router } from 'https://deno.land/x/oak/mod.ts'
+import { Router } from 'https://deno.land/x/oak/mod.ts';
 
 // All routes
-import getTasks from './controllers/get.js'
-import postTask from './controllers/post.js'
-import deleteTask from './controllers/delete.js'
-import putTask from './controllers/put.js'
+import * as ctrl from './controllers/index.js';
 
-
-const router = new Router()
+const router = new Router();
 
 router.get('/', ({ response }) => {
-  response.body = 'Tasks API'
+  response.body = 'Tasks API';
 })
 
 router
-  .get('/tasks', getTasks)
-  .post('/tasks', postTask)
-  .delete('/task/:id', deleteTask)
-  .put('/task/:id', putTask)
+  .get('/tasks', ctrl.getTasks)
+  .post('/tasks', ctrl.postTask)
+  .delete('/task/:id', ctrl.deleteTask)
+  .put('/task/:id', ctrl.putTask);
 
-export default router
+export default router;
