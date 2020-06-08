@@ -11,6 +11,7 @@ router.get('/', ({ response }) => {
 
 router
   .get('/tasks', ctrl.getTasks)
+  .get('/task/:id', ctrl.getTaskById)
   .post('/tasks', ctrl.postTask)
   .delete('/task/:id', ctrl.deleteTask)
   .put('/task/:id', ctrl.putTask);

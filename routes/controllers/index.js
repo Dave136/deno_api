@@ -16,6 +16,27 @@ export async function getTasks({ response }) {
   }
 }
 
+export async function getTaskById({ response, params }) {
+  const decoder = new TextDecoder();
+  try {
+    const data = await Deno.readFile(FILE_PATH)
+    const tasks = JSON.parse(decoder.decode(data))
+
+    const item = tasks.filter(task => task.id === params.id)
+
+    console.log(item)
+    response.status = 200;
+    response.body = {
+      status: 'Success',
+      task: item
+    };
+  } catch (e) {
+    response.status = 500;
+    response.body = {status: 'Task not found', e};
+    console.log(e);
+  }
+}
+
 export async function postTask({ request, response }) {
   const decoder = new TextDecoder();
   const encoder = new TextEncoder();
